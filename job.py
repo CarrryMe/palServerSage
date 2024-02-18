@@ -10,7 +10,7 @@ def available():
     SageServer.available()
 
 # 设置每 5 分钟执行一次任务
-schedule.every(1).minutes.at(":00").do(save_back)
+schedule.every(5).minutes.at(":00").do(save_back)
 # 设置每 5 分钟执行一次任务
 schedule.every(5).minutes.at(":00").do(available)
 
