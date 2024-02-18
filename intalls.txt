@@ -1,0 +1,5 @@
+flask_cors
+psutil
+schedule
+subprocess
+Flask

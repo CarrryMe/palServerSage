@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理界面</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="vue.global.js"></script>
+</head>
+<body id = "app">
+    <!-- 添加新的固定高度的框 -->
+    <div class="fixed-box">
+        <button v-if="admin" @click="startServer" :disabled="buttonsDisabled">启动服务</button>
+        <button v-if="admin" @click="stopServer" :disabled="buttonsDisabled">停止服务</button>
+        <button v-if="admin" @click="restartServer" :disabled="buttonsDisabled">重启服务</button>
+        <button @click="savedManager" :disabled="buttonsDisabled">管理存档</button>
+        <button v-if="admin" @click="" :disabled="buttonsDisabled">管理玩家</button>
+        <button v-if="admin" @click="" :disabled="buttonsDisabled">配置更新</button>
+        <button @click="saveToken" :disabled="buttonsDisabled">管理模式</button>
+
+        <div class="server_status" :class="{ 'running': isRunning, 'not-running': !isRunning }">
+            <!-- 使用 v-if 来根据 isRunning 的值来决定显示哪个内容 -->
+            <div v-if="loading" class="loading-spinner"></div> <!-- 加载中的转圈动画 -->
+            <span v-else-if="isRunning">&nbsp;运行中...</span>
+            <span v-else>&nbsp;未启动...</span>
+        </div>
+    </div>
+
+    <main class="content">
+        <!-- 主要内容区域 -->
+        <h1>Welcome to the Dashboard</h1>
+        <div v-if="loadingPage" class="loading-spinner"></div>
+        <!-- 存档列表 -->
+        <div v-if="savedList" class="archive-list">
+            <div v-for="(filename, index) in filenames" :key="index" class="archive-item">
+                <span>{{ filename }}</span>
+                <button v-if="admin" @click="restoreSaved(filename)">恢复存档</button>
+                <button @click="downloadSaved(filename)">下载存档</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 引入 JavaScript 文件 -->
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>
