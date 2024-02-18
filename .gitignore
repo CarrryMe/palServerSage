@@ -1,1 +1,4 @@
 /.idea/.gitignore
+/shutdown/
+/palBack/
+/venv/
